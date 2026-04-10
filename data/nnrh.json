@@ -1,0 +1,28 @@
+{
+  "name": "Northeastern Nevada Regional Hospital",
+  "shortName": "NNRH",
+  "location": "Elko, NV",
+  "resources": [
+    {
+      "name": "Nevada 988 Crisis Line",
+      "type": "crisis",
+      "phone": "988",
+      "description": "24/7 suicide and crisis support for Nevada residents",
+      "url": ""
+    },
+    {
+      "name": "New Frontier Treatment Center",
+      "type": "counseling",
+      "phone": "775-738-9808",
+      "description": "Substance abuse and mental health treatment services in Elko",
+      "url": ""
+    },
+    {
+      "name": "Vitality Unlimited",
+      "type": "support",
+      "phone": "775-738-8858",
+      "description": "Domestic violence and sexual assault support services",
+      "url": ""
+    }
+  ]
+}

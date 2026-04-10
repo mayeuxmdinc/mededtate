@@ -1,0 +1,21 @@
+{
+  "name": "Castleview Hospital",
+  "shortName": "Castleview",
+  "location": "Price, UT",
+  "resources": [
+    {
+      "name": "Utah Crisis Line",
+      "type": "crisis",
+      "phone": "988",
+      "description": "24/7 suicide and crisis support for Utah residents",
+      "url": ""
+    },
+    {
+      "name": "Four Corners Community Behavioral Health",
+      "type": "counseling",
+      "phone": "435-637-7200",
+      "description": "Outpatient mental health and substance abuse services in Carbon County",
+      "url": ""
+    }
+  ]
+}
