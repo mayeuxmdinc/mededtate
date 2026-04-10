@@ -21,10 +21,10 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
+        <li><a href="#local">Local Resources</a></li>
         <li><a href="#about">What is MBSR?</a></li>
         <li><a href="#breathing">Breathing Exercises</a></li>
         <li><a href="#resources">MBSR Resources</a></li>
-        <li><a href="#local">Local Resources</a></li>
         <li><a href="#crisis" class="nav-crisis">Need Help Now?</a></li>
       </ul>
     </div>
@@ -54,6 +54,29 @@
       </svg>
     </div>
   </header>
+
+  <!-- Local Resources -->
+  <section class="section section-alt" id="local">
+    <div class="container">
+      <h2 class="section-title">Local Resources</h2>
+      <p class="section-subtitle">
+        Select your facility to see mental health and crisis resources in your area.
+      </p>
+
+      <div class="er-selector">
+        <label for="er-select">Your facility:</label>
+        <select id="er-select">
+          <option value="">— Select your facility —</option>
+        </select>
+      </div>
+
+      <div id="local-resources-container"></div>
+
+      <p class="local-note" id="local-note" style="display:none;">
+        Don't see your facility? Ask your care team about getting local resources added to MedEdTate.
+      </p>
+    </div>
+  </section>
 
   <!-- What is MBSR -->
   <section class="section" id="about">
@@ -358,29 +381,6 @@
     </div>
   </section>
 
-  <!-- Local Resources -->
-  <section class="section section-alt" id="local">
-    <div class="container">
-      <h2 class="section-title">Local Resources</h2>
-      <p class="section-subtitle">
-        Select your facility to see mental health and crisis resources in your area.
-      </p>
-
-      <div class="er-selector">
-        <label for="er-select">Your facility:</label>
-        <select id="er-select">
-          <option value="">— Select your facility —</option>
-        </select>
-      </div>
-
-      <div id="local-resources-container"></div>
-
-      <p class="local-note" id="local-note" style="display:none;">
-        Don't see your facility? Ask your care team about getting local resources added to MedEdTate.
-      </p>
-    </div>
-  </section>
-
   <!-- Crisis Resources -->
   <section class="section section-crisis" id="crisis">
     <div class="container">
@@ -494,7 +494,7 @@
         '</div>';
     }
 
-    function loadER(id) {
+    function loadER(id, scrollTo) {
       if (!id) {
         container.innerHTML = '';
         localNote.style.display = 'none';
@@ -506,6 +506,9 @@
           renderResources(data);
           localNote.style.display = 'block';
           localStorage.setItem('mededtate-er', id);
+          if (scrollTo) {
+            document.getElementById('local').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         })
         .catch(function() {
           container.innerHTML = '<p class="local-error">Unable to load resources. Please try again.</p>';
@@ -531,7 +534,7 @@
 
         if (initial && erSelect.querySelector('option[value="' + initial + '"]')) {
           erSelect.value = initial;
-          loadER(initial);
+          loadER(initial, !!erParam);
         }
       })
       .catch(function() {});
