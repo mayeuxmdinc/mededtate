@@ -1,0 +1,35 @@
+{
+  "name": "Ashley Regional Medical Center",
+  "shortName": "ARMC",
+  "location": "Vernal, UT",
+  "resources": [
+    {
+      "name": "Utah Crisis Line (988)",
+      "type": "crisis",
+      "phone": "988",
+      "description": "24/7 suicide and crisis support for Utah residents",
+      "url": ""
+    },
+    {
+      "name": "Northeastern Counseling Center — Crisis Line",
+      "type": "crisis",
+      "phone": "435-828-8241",
+      "description": "24/7 local crisis line for Uintah, Duchesne, and Daggett counties",
+      "url": ""
+    },
+    {
+      "name": "Northeastern Counseling Center",
+      "type": "counseling",
+      "phone": "435-789-6300",
+      "description": "Outpatient behavioral health services for adults, children, and families in Vernal",
+      "url": "https://nccutah.org/"
+    },
+    {
+      "name": "Uintah Basin Healthcare — Behavioral Health",
+      "type": "counseling",
+      "phone": "435-725-2036",
+      "description": "Behavioral health services in the Uintah Basin area",
+      "url": "https://ubh.org/category/doctors/behavioral-health/"
+    }
+  ]
+}

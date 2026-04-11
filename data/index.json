@@ -1,4 +1,5 @@
 [
-  { "id": "nnrh", "name": "Northeastern Nevada Regional Hospital", "location": "Elko, NV" },
-  { "id": "castleview", "name": "Castleview Hospital", "location": "Price, UT" }
+  { "id": "armc", "name": "Ashley Regional Medical Center", "location": "Vernal, UT" },
+  { "id": "castleview", "name": "Castleview Hospital", "location": "Price, UT" },
+  { "id": "nnrh", "name": "Northeastern Nevada Regional Hospital", "location": "Elko, NV" }
 ]
