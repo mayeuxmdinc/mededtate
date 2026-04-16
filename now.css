@@ -286,6 +286,7 @@ body {
 .breath-circle.exhale {
   transform: scale(1);
   border-color: var(--now-accent-green);
+  transition: transform 8s ease-in-out, border-color 0.6s ease;
 }
 
 .breath-circle.hold-out {
