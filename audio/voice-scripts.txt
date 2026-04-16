@@ -1,0 +1,77 @@
+MedEdTate /now Voice Guide — ElevenLabs Recording Scripts
+=========================================================
+
+Voice recommendation: Pick a calm, warm female voice.
+Good choices: "Rachel", "Domi", or "Bella"
+Settings: Stability ~0.7, Clarity ~0.8, Speed: slow/gentle
+
+Save each clip as the filename shown. Format: MP3.
+After downloading, convert filenames to .m4a or update now.js to use .mp3.
+
+---
+
+BREATHING EXERCISE (3 clips)
+-----------------------------
+
+Filename: breathe_inhale.mp3
+Text: Breathe in.
+
+Filename: breathe_hold.mp3
+Text: Hold.
+
+Filename: breathe_exhale.mp3
+Text: Breathe out.
+
+
+GROUNDING EXERCISE (6 clips)
+------------------------------
+
+Filename: ground_1.mp3
+Text: Name five things you can see right now.
+
+Filename: ground_2.mp3
+Text: Name four things you can physically feel.
+
+Filename: ground_3.mp3
+Text: Name three things you can hear.
+
+Filename: ground_4.mp3
+Text: Name two things you can smell.
+
+Filename: ground_5.mp3
+Text: Name one thing you can taste.
+
+Filename: ground_6.mp3
+Text: Good. You're here. You're present.
+
+
+BODY SCAN EXERCISE (7 clips)
+------------------------------
+
+Filename: scan_feet.mp3
+Text: Bring your attention to your feet. Notice any tension. Let it soften.
+
+Filename: scan_legs.mp3
+Text: Move your awareness up to your legs. Let any tightness release.
+
+Filename: scan_abdomen.mp3
+Text: Focus on your abdomen. Notice it rise and fall with each breath.
+
+Filename: scan_chest.mp3
+Text: Bring attention to your chest. Let your breathing be natural and easy.
+
+Filename: scan_shoulders.mp3
+Text: Notice your shoulders. Let them drop. Release the weight you carry.
+
+Filename: scan_face.mp3
+Text: Soften your face. Unclench your jaw. Let your forehead relax.
+
+Filename: scan_done.mp3
+Text: Well done. Your whole body has been heard.
+
+
+ENTRY (1 clip — optional)
+--------------------------
+
+Filename: entry.mp3
+Text: You're safe. Let's slow things down.
