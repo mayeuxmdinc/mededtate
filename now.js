@@ -4,7 +4,7 @@
   // ===== State =====
   var currentPhase = 'entry';
   var timers = [];
-  var soundOn = true;
+  var soundOn = false;
   var currentAudio = null;
 
   // ===== Audio =====
@@ -12,16 +12,19 @@
   var iconOn = document.getElementById('icon-sound-on');
   var iconOff = document.getElementById('icon-sound-off');
 
-  btnSound.addEventListener('click', function () {
-    soundOn = !soundOn;
-    btnSound.classList.toggle('active', soundOn);
-    iconOn.style.display = soundOn ? 'block' : 'none';
-    iconOff.style.display = soundOn ? 'none' : 'block';
-    if (!soundOn && currentAudio) {
-      currentAudio.pause();
-      currentAudio = null;
-    }
-  });
+  if (btnSound) {
+    soundOn = true;
+    btnSound.addEventListener('click', function () {
+      soundOn = !soundOn;
+      btnSound.classList.toggle('active', soundOn);
+      iconOn.style.display = soundOn ? 'block' : 'none';
+      iconOff.style.display = soundOn ? 'none' : 'block';
+      if (!soundOn && currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
+    });
+  }
 
   function playAudio(file) {
     if (!soundOn) return;
