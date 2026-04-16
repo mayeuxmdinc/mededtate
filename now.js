@@ -53,7 +53,7 @@
 
   function updateNav(phase) {
     // Show back button on exercise screens and check-in
-    var showBack = (phase === 'breathe' || phase === 'ground' || phase === 'scan' || phase === 'checkin');
+    var showBack = (phase === 'calm' || phase === 'breathe' || phase === 'ground' || phase === 'scan' || phase === 'checkin');
     btnBack.style.display = showBack ? 'flex' : 'none';
   }
 
@@ -93,13 +93,83 @@
   document.querySelectorAll('.mode-card').forEach(function (card) {
     card.addEventListener('click', function () {
       var mode = card.getAttribute('data-mode');
-      if (mode === 'breathe') startBreathing();
+      if (mode === 'calm') startCalmBreath();
+      else if (mode === 'breathe') startBreathing();
       else if (mode === 'ground') startGrounding();
       else if (mode === 'scan') startBodyScan();
     });
   });
 
-  // ===== Phase 2A: Breathing =====
+  // ===== Phase 2A-calm: Calm Breath (4-7-8) =====
+  function startCalmBreath() {
+    showPhase('calm');
+
+    var circle = document.getElementById('calm-circle');
+    var label = document.getElementById('calm-label');
+    var count = document.getElementById('calm-count');
+    var roundEl = document.getElementById('calm-round');
+    var progress = document.getElementById('calm-progress');
+
+    var phases = [
+      { name: 'Inhale', css: 'inhale', duration: 4 },
+      { name: 'Hold', css: 'hold-in', duration: 7 },
+      { name: 'Exhale', css: 'exhale', duration: 8 }
+    ];
+
+    var totalRounds = 4;
+    var round = 0;
+    var phaseIdx = 0;
+    var totalPhases = totalRounds * phases.length;
+    var completedPhases = 0;
+
+    function runPhase() {
+      if (round >= totalRounds) {
+        showPhase('checkin');
+        resetCheckin();
+        return;
+      }
+
+      var p = phases[phaseIdx];
+      label.textContent = p.name;
+      circle.className = 'breath-circle ' + p.css;
+      roundEl.textContent = 'Round ' + (round + 1) + ' of ' + totalRounds;
+
+      // Voice cues
+      if (p.css === 'inhale') playAudio('breathe_inhale.mp3');
+      else if (p.css === 'exhale') playAudio('breathe_exhale.mp3');
+      else if (p.css === 'hold-in') playAudio('breathe_hold.mp3');
+
+      var sec = p.duration;
+      count.textContent = sec;
+
+      var countDown = setInterval(function () {
+        sec--;
+        if (sec > 0) {
+          count.textContent = sec;
+        }
+      }, 1000);
+      timers.push(countDown);
+
+      var next = setTimeout(function () {
+        clearInterval(countDown);
+        completedPhases++;
+        progress.style.width = ((completedPhases / totalPhases) * 100) + '%';
+
+        phaseIdx++;
+        if (phaseIdx >= phases.length) {
+          phaseIdx = 0;
+          round++;
+        }
+        runPhase();
+      }, p.duration * 1000);
+      timers.push(next);
+    }
+
+    progress.style.width = '0%';
+    runPhase();
+  }
+
+  // ===== Phase 2A-box: Box Breathing =====
   function startBreathing() {
     showPhase('breathe');
 

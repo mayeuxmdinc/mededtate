@@ -46,9 +46,14 @@
   <section id="phase-select" class="phase">
     <div class="phase-center">
       <div class="mode-cards">
+        <button class="mode-card" data-mode="calm">
+          <span class="mode-icon" aria-hidden="true">&#x1F32C;&#xFE0F;</span>
+          <span class="mode-label">Calm Breath</span>
+          <span class="mode-sub">Deep slow breathing</span>
+        </button>
         <button class="mode-card" data-mode="breathe">
           <span class="mode-icon" aria-hidden="true">&#x1FAC1;</span>
-          <span class="mode-label">Breathe</span>
+          <span class="mode-label">Box Breathe</span>
           <span class="mode-sub">Slow your body down</span>
         </button>
         <button class="mode-card" data-mode="ground">
@@ -65,7 +70,19 @@
     </div>
   </section>
 
-  <!-- Phase 2A: Breathing -->
+  <!-- Phase 2A-calm: Calm Breath (4-7-8) -->
+  <section id="phase-calm" class="phase">
+    <div class="phase-center">
+      <div class="breath-progress-bar"><div class="breath-progress-fill" id="calm-progress"></div></div>
+      <div class="breath-circle" id="calm-circle">
+        <span class="breath-label" id="calm-label">Inhale</span>
+        <span class="breath-count" id="calm-count">4</span>
+      </div>
+      <p class="breath-round" id="calm-round">Round 1 of 4</p>
+    </div>
+  </section>
+
+  <!-- Phase 2A-box: Box Breathing -->
   <section id="phase-breathe" class="phase">
     <div class="phase-center">
       <div class="breath-progress-bar"><div class="breath-progress-fill" id="breath-progress"></div></div>
