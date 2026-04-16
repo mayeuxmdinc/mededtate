@@ -76,14 +76,90 @@ a:hover {
   padding: 0 24px;
 }
 
+/* ===== Split Hero ===== */
+.hero-split {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 110;
+}
+
+.btn-now,
+.btn-learn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px;
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+  min-height: 64px;
+}
+
+.btn-now {
+  flex: 1;
+  background: #C0392B;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.btn-now:hover {
+  background: #a93226;
+  color: #fff;
+}
+
+.btn-learn {
+  flex: 1;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-learn:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .hero-split {
+    flex-direction: column;
+  }
+
+  .btn-now {
+    font-size: 1.3rem;
+    padding: 24px 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-learn {
+    font-size: 0.95rem;
+    padding: 14px 20px;
+  }
+}
+
+/* When scrolled, collapse to just the help button */
+.hero-split.scrolled .btn-learn {
+  display: none;
+}
+
+.hero-split.scrolled .btn-now {
+  padding: 14px 20px;
+  font-size: 1.1rem;
+}
+
 /* ===== Navigation ===== */
 .nav {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: transparent;
+  background: rgba(247, 250, 248, 0.95);
+  backdrop-filter: blur(10px);
   transition: background var(--transition), box-shadow var(--transition);
 }
 
@@ -175,7 +251,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 120px 24px 80px;
+  padding: 80px 24px 80px;
   background: linear-gradient(160deg, #e8f4ee 0%, #f0f7f3 40%, #f7faf8 100%);
   overflow: hidden;
 }

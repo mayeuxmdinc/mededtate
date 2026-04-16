@@ -13,6 +13,12 @@
 </head>
 <body>
 
+  <!-- Split Hero -->
+  <div class="hero-split">
+    <a href="/now.html" class="btn-now">I need help right now &rarr;</a>
+    <a href="#local" class="btn-learn">Learn about mindfulness &amp; MBSR &darr;</a>
+  </div>
+
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -454,10 +460,13 @@
       navLinks.classList.toggle('active');
     });
 
-    // Navbar background on scroll
+    // Navbar background on scroll + hero-split collapse
     const nav = document.getElementById('nav');
+    const heroSplit = document.querySelector('.hero-split');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      nav.classList.toggle('scrolled', scrolled);
+      if (heroSplit) heroSplit.classList.toggle('scrolled', scrolled);
     });
 
     // === Local Resources ===
