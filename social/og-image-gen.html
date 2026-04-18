@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face {
+      font-family: 'Knoxville';
+      src: url('../fonts/Knoxville-Regular.otf') format('opentype'),
+           url('../fonts/Knoxville-Regular.ttf') format('truetype');
+      font-weight: normal;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #eef5f1; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      background: linear-gradient(135deg, #f7faf8 0%, #eef5f1 50%, #e0f0e8 100%);
+      display: flex;
+      align-items: center;
+      font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+      position: relative;
+    }
+
+    /* Subtle decorative circles (matches hero animation on site) */
+    .decoration {
+      position: absolute;
+      left: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 360px;
+      height: 360px;
+    }
+    .decoration circle { fill: none; stroke: #4a8b6e; }
+
+    /* Left side: lotus mark inside circles */
+    .lotus-wrap {
+      position: relative;
+      width: 400px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    .lotus {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Right content */
+    .content {
+      flex: 1;
+      padding: 0 72px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+    .brand {
+      font-family: 'Knoxville', serif;
+      font-size: 72px;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      color: #1a2e24;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .brand span { color: #4a8b6e; }
+    .tagline {
+      font-size: 24px;
+      color: #5a7268;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: linear-gradient(90deg, #4a8b6e, #6ba593);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .description {
+      font-size: 20px;
+      color: #2d3e36;
+      line-height: 1.55;
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+    .pills {
+      display: flex;
+      gap: 12px;
+    }
+    .pill {
+      padding: 8px 22px;
+      border-radius: 100px;
+      background: #fff;
+      border: 1.5px solid #d4e5dc;
+      color: #3a7259;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .url {
+      position: absolute;
+      bottom: 40px;
+      right: 72px;
+      font-size: 17px;
+      color: #6ba593;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lotus-wrap">
+    <!-- Decorative breathing circles from the site's hero -->
+    <svg style="position:absolute;width:340px;height:340px;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#4a8b6e" stroke-width="0.6" opacity="0.25"/>
+      <circle cx="100" cy="100" r="60" fill="none" stroke="#4a8b6e" stroke-width="0.6" opacity="0.18"/>
+      <circle cx="100" cy="100" r="40" fill="none" stroke="#4a8b6e" stroke-width="0.6" opacity="0.12"/>
+    </svg>
+
+    <!-- Lotus -->
+    <svg class="lotus" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer petals -->
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(0 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(45 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(90 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(135 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(180 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(225 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(270 70 70)"/>
+      <ellipse cx="70" cy="36" rx="9" ry="26" fill="#6ba593" opacity="0.7" transform="rotate(315 70 70)"/>
+      <!-- Inner petals -->
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(0 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(45 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(90 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(135 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(180 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(225 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(270 70 70)"/>
+      <ellipse cx="70" cy="44" rx="6.5" ry="19" fill="#4a8b6e" opacity="0.9" transform="rotate(315 70 70)"/>
+      <!-- Center -->
+      <circle cx="70" cy="70" r="13" fill="#3a7259"/>
+      <circle cx="70" cy="70" r="7" fill="#e0f0e8"/>
+    </svg>
+  </div>
+
+  <div class="content">
+    <div class="brand">MED<span>ed</span>TATE</div>
+    <div class="tagline">calm for the ER</div>
+    <div class="divider"></div>
+    <div class="description">One tap. Guided breathing for anxiety and panic — no login, no app, no setup. Relief right when patients need it most.</div>
+    <div class="pills">
+      <div class="pill">breathe</div>
+      <div class="pill">ground</div>
+      <div class="pill">reset</div>
+    </div>
+  </div>
+
+  <div class="url">mededtate.com</div>
+</body>
+</html>
