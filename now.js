@@ -26,16 +26,32 @@
     });
   }
 
+  // Audio cache: one element per file, reused across plays. Mobile Safari
+  // chokes when you construct + .play() new Audio elements rapidly (each
+  // pause+replace cycle can throw AbortError that the .catch then swallows,
+  // killing audio entirely after 1-2 plays). Reusing one element per file
+  // and seeking to 0 instead avoids the lifecycle race.
+  var audioCache = {};
+
   function playAudio(file) {
-    console.log('[playAudio] called with', file, 'soundOn=', soundOn);
-    if (!soundOn) { console.warn('[playAudio] skipped — soundOn=false'); return; }
-    if (currentAudio) {
-      currentAudio.pause();
+    if (!soundOn) return;
+    var next = audioCache[file];
+    if (!next) {
+      next = new Audio('audio/' + file);
+      next.preload = 'auto';
+      audioCache[file] = next;
     }
-    currentAudio = new Audio('audio/' + file);
-    currentAudio.play()
-      .then(function () { console.log('[playAudio] playing:', file); })
-      .catch(function (err) { console.error('[playAudio] FAILED for', file, err); });
+    // Pause any *other* audio still playing — but if we're replaying the
+    // same clip, just seek to 0 (no pause/play race).
+    if (currentAudio && currentAudio !== next) {
+      try { currentAudio.pause(); } catch (e) {}
+    }
+    currentAudio = next;
+    try { next.currentTime = 0; } catch (e) {}
+    var p = next.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(function () { /* swallow autoplay/abort errors silently */ });
+    }
   }
 
   function stopAudio() {
