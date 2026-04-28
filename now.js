@@ -27,12 +27,15 @@
   }
 
   function playAudio(file) {
-    if (!soundOn) return;
+    console.log('[playAudio] called with', file, 'soundOn=', soundOn);
+    if (!soundOn) { console.warn('[playAudio] skipped — soundOn=false'); return; }
     if (currentAudio) {
       currentAudio.pause();
     }
     currentAudio = new Audio('audio/' + file);
-    currentAudio.play().catch(function () {});
+    currentAudio.play()
+      .then(function () { console.log('[playAudio] playing:', file); })
+      .catch(function (err) { console.error('[playAudio] FAILED for', file, err); });
   }
 
   function stopAudio() {
@@ -42,10 +45,10 @@
     }
   }
 
-  function clearAllTimers() {
+  function clearAllTimers(keepAudio) {
     timers.forEach(function (t) { clearTimeout(t); clearInterval(t); });
     timers = [];
-    stopAudio();
+    if (!keepAudio) stopAudio();
   }
 
   // ===== Nav =====
@@ -62,8 +65,8 @@
   });
 
   // ===== Phase Transitions =====
-  function showPhase(id) {
-    clearAllTimers();
+  function showPhase(id, keepAudio) {
+    clearAllTimers(keepAudio);
     document.querySelectorAll('.phase').forEach(function (el) {
       el.classList.remove('active');
     });
@@ -76,17 +79,25 @@
   }
 
   // ===== Phase 0: Entry =====
+  // Browsers block Audio.play() that isn't tied to a user click. So we
+  // can't auto-play entry audio on page load — must wait for "Ready"
+  // click. That click also unlocks audio for the rest of the session.
   var btnReady = document.getElementById('btn-ready');
   btnReady.addEventListener('click', function () {
-    showPhase('select');
+    playAudio('entry.mp3');
+    // Brief delay so the user sees the click registered, then transition
+    // to mode-select. keepAudio=true keeps Grace's entry line playing
+    // across the screen change instead of being cut off mid-sentence.
+    setTimeout(function () { showPhase('select', true); }, 600);
   });
 
-  // Auto-advance after 4 seconds
+  // Auto-advance after 7 seconds if the user doesn't click. Audio is
+  // skipped in this path since browsers won't allow it without a click.
   var autoAdvance = setTimeout(function () {
     if (currentPhase === 'entry') {
       showPhase('select');
     }
-  }, 4000);
+  }, 7000);
   timers.push(autoAdvance);
 
   // ===== Phase 1: Mode Select =====

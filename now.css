@@ -370,7 +370,9 @@ body {
 .body-part {
   fill: var(--now-card-bg);
   stroke: var(--now-card-border);
-  stroke-width: 1.5;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
   transition: fill 0.6s ease, stroke 0.6s ease;
 }
 

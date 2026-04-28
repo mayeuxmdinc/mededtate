@@ -20,12 +20,10 @@
       <span>MedEdTate</span>
     </a>
     <div class="now-nav-right">
-      <!-- Sound toggle hidden until voice tracks are added
       <button class="now-nav-sound active" id="btn-sound" aria-label="Toggle voice guide">
         <svg id="icon-sound-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         <svg id="icon-sound-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
       </button>
-      -->
       <button class="now-nav-back" id="btn-back" aria-label="Go back" style="display:none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         <span>Back</span>
@@ -112,23 +110,23 @@
           <!-- Neck -->
           <rect class="body-part" data-region="face" x="90" y="75" width="20" height="18" rx="4"/>
           <!-- Shoulders -->
-          <path class="body-part" data-region="shoulders" d="M60 95 Q100 85 140 95 L140 110 Q100 100 60 110 Z"/>
+          <path class="body-part" data-region="shoulders" d="M60 95 Q100 82 140 95 Q142 102 140 110 Q100 100 60 110 Q58 102 60 95 Z"/>
           <!-- Torso upper (chest) -->
-          <path class="body-part" data-region="chest" d="M60 110 L60 200 Q100 210 140 200 L140 110 Q100 100 60 110 Z"/>
+          <path class="body-part" data-region="chest" d="M60 110 Q56 155 60 200 Q100 212 140 200 Q144 155 140 110 Q100 100 60 110 Z"/>
           <!-- Torso lower (abdomen) -->
-          <path class="body-part" data-region="abdomen" d="M60 200 L65 280 Q100 290 135 280 L140 200 Q100 210 60 200 Z"/>
-          <!-- Left arm -->
-          <path class="body-part" data-region="shoulders" d="M60 95 L35 100 L20 200 L30 205 L45 115 L60 110 Z" />
+          <path class="body-part" data-region="abdomen" d="M60 200 Q60 240 65 280 Q100 292 135 280 Q140 240 140 200 Q100 212 60 200 Z"/>
+          <!-- Left arm (curved outer + inner edges) -->
+          <path class="body-part" data-region="shoulders" d="M60 95 Q45 95 35 100 Q22 145 20 200 Q25 208 30 205 Q40 155 45 115 Q52 110 60 110 Z" />
           <!-- Right arm -->
-          <path class="body-part" data-region="shoulders" d="M140 95 L165 100 L180 200 L170 205 L155 115 L140 110 Z" />
+          <path class="body-part" data-region="shoulders" d="M140 95 Q155 95 165 100 Q178 145 180 200 Q175 208 170 205 Q160 155 155 115 Q148 110 140 110 Z" />
           <!-- Left leg -->
-          <path class="body-part" data-region="legs" d="M65 280 L60 400 L55 430 L80 430 L75 400 L100 285 Z"/>
+          <path class="body-part" data-region="legs" d="M65 280 Q58 340 60 400 Q56 415 55 430 Q67 434 80 430 Q78 415 75 400 Q90 340 100 285 Q82 290 65 280 Z"/>
           <!-- Right leg -->
-          <path class="body-part" data-region="legs" d="M135 280 L140 400 L145 430 L120 430 L125 400 L100 285 Z"/>
+          <path class="body-part" data-region="legs" d="M135 280 Q142 340 140 400 Q144 415 145 430 Q133 434 120 430 Q122 415 125 400 Q110 340 100 285 Q118 290 135 280 Z"/>
           <!-- Left foot -->
-          <path class="body-part" data-region="feet" d="M55 430 L45 465 L85 465 L80 430 Z"/>
+          <path class="body-part" data-region="feet" d="M55 430 Q48 445 45 465 Q65 470 85 465 Q82 445 80 430 Q67 434 55 430 Z"/>
           <!-- Right foot -->
-          <path class="body-part" data-region="feet" d="M145 430 L155 465 L115 465 L120 430 Z"/>
+          <path class="body-part" data-region="feet" d="M145 430 Q152 445 155 465 Q135 470 115 465 Q118 445 120 430 Q133 434 145 430 Z"/>
         </svg>
         <p class="scan-instruction" id="scan-instruction"></p>
       </div>
