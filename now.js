@@ -26,32 +26,33 @@
     });
   }
 
-  // Audio cache: one element per file, reused across plays. Mobile Safari
-  // chokes when you construct + .play() new Audio elements rapidly (each
-  // pause+replace cycle can throw AbortError that the .catch then swallows,
-  // killing audio entirely after 1-2 plays). Reusing one element per file
-  // and seeking to 0 instead avoids the lifecycle race.
-  var audioCache = {};
+  // ONE shared Audio element. Swap .src between calls instead of
+  // constructing new elements per file. Mobile Safari unlocks an Audio
+  // element for autoplay once you've play()'d it inside a user gesture
+  // — once unlocked, subsequent src changes + play() calls work without
+  // restriction. This avoids both:
+  //   (a) the multi-element pause/play race that breaks iOS after 1-2 plays
+  //   (b) the multiple-files-playing-at-once issue from priming each
+  //       audio element separately
+  var sharedAudio = new Audio();
+  sharedAudio.preload = 'auto';
 
   function playAudio(file) {
     if (!soundOn) return;
-    var next = audioCache[file];
-    if (!next) {
-      next = new Audio('audio/' + file);
-      next.preload = 'auto';
-      audioCache[file] = next;
+    var url = 'audio/' + file;
+    // Only reset src when switching files. Replaying the same file just
+    // seeks to 0 — cheaper and avoids a reload flash.
+    var sameFile = sharedAudio.src && sharedAudio.src.indexOf(file) !== -1
+    if (!sameFile) {
+      sharedAudio.src = url;
+    } else {
+      try { sharedAudio.currentTime = 0; } catch (e) {}
     }
-    // Pause any *other* audio still playing — but if we're replaying the
-    // same clip, just seek to 0 (no pause/play race).
-    if (currentAudio && currentAudio !== next) {
-      try { currentAudio.pause(); } catch (e) {}
-    }
-    currentAudio = next;
-    try { next.currentTime = 0; } catch (e) {}
-    var p = next.play();
+    var p = sharedAudio.play();
     if (p && typeof p.catch === 'function') {
       p.catch(function () { /* swallow autoplay/abort errors silently */ });
     }
+    currentAudio = sharedAudio;
   }
 
   function stopAudio() {
@@ -95,44 +96,13 @@
   }
 
   // ===== Phase 0: Entry =====
-  // Browsers block Audio.play() that isn't tied to a user click. So we
-  // can't auto-play entry audio on page load — must wait for "Ready"
-  // click. That click also unlocks audio for the rest of the session.
-  //
-  // iOS Safari quirk: each Audio element inherits play permission from
-  // the user gesture that CREATED it. Elements created later (during
-  // the breathing cycle) stay locked. So we pre-construct AND prime
-  // every audio file during the Ready click — play + immediate pause
-  // unlocks each element for future autoplay.
-  var ALL_AUDIO_FILES = [
-    'entry.mp3',
-    'breathe_inhale.mp3', 'breathe_hold.mp3', 'breathe_exhale.mp3',
-    'ground_1.mp3', 'ground_2.mp3', 'ground_3.mp3',
-    'ground_4.mp3', 'ground_5.mp3', 'ground_6.mp3',
-    'scan_feet.mp3', 'scan_legs.mp3', 'scan_abdomen.mp3',
-    'scan_chest.mp3', 'scan_shoulders.mp3', 'scan_face.mp3', 'scan_done.mp3',
-  ];
-
-  function primeAllAudio() {
-    ALL_AUDIO_FILES.forEach(function (file) {
-      if (audioCache[file]) return;
-      var a = new Audio('audio/' + file);
-      a.preload = 'auto';
-      audioCache[file] = a;
-      // Play + pause inside this gesture to unlock for future autoplay.
-      var p = a.play();
-      if (p && typeof p.then === 'function') {
-        p.then(function () {
-          a.pause();
-          try { a.currentTime = 0; } catch (e) {}
-        }).catch(function () {});
-      }
-    });
-  }
-
+  // Browsers block Audio.play() that isn't tied to a user click. The
+  // Ready click below playing entry.mp3 is the user gesture that
+  // unlocks our shared Audio element for the rest of the session —
+  // after this, all subsequent playAudio() calls work without
+  // restriction even though they're triggered by timers.
   var btnReady = document.getElementById('btn-ready');
   btnReady.addEventListener('click', function () {
-    primeAllAudio();
     playAudio('entry.mp3');
     // Brief delay so the user sees the click registered, then transition
     // to mode-select. keepAudio=true keeps Grace's entry line playing
