@@ -98,8 +98,41 @@
   // Browsers block Audio.play() that isn't tied to a user click. So we
   // can't auto-play entry audio on page load — must wait for "Ready"
   // click. That click also unlocks audio for the rest of the session.
+  //
+  // iOS Safari quirk: each Audio element inherits play permission from
+  // the user gesture that CREATED it. Elements created later (during
+  // the breathing cycle) stay locked. So we pre-construct AND prime
+  // every audio file during the Ready click — play + immediate pause
+  // unlocks each element for future autoplay.
+  var ALL_AUDIO_FILES = [
+    'entry.mp3',
+    'breathe_inhale.mp3', 'breathe_hold.mp3', 'breathe_exhale.mp3',
+    'ground_1.mp3', 'ground_2.mp3', 'ground_3.mp3',
+    'ground_4.mp3', 'ground_5.mp3', 'ground_6.mp3',
+    'scan_feet.mp3', 'scan_legs.mp3', 'scan_abdomen.mp3',
+    'scan_chest.mp3', 'scan_shoulders.mp3', 'scan_face.mp3', 'scan_done.mp3',
+  ];
+
+  function primeAllAudio() {
+    ALL_AUDIO_FILES.forEach(function (file) {
+      if (audioCache[file]) return;
+      var a = new Audio('audio/' + file);
+      a.preload = 'auto';
+      audioCache[file] = a;
+      // Play + pause inside this gesture to unlock for future autoplay.
+      var p = a.play();
+      if (p && typeof p.then === 'function') {
+        p.then(function () {
+          a.pause();
+          try { a.currentTime = 0; } catch (e) {}
+        }).catch(function () {});
+      }
+    });
+  }
+
   var btnReady = document.getElementById('btn-ready');
   btnReady.addEventListener('click', function () {
+    primeAllAudio();
     playAudio('entry.mp3');
     // Brief delay so the user sees the click registered, then transition
     // to mode-select. keepAudio=true keeps Grace's entry line playing
